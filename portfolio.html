@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — Daniel J. Fuller</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --black: #0c0c0c;
+    --dark: #161412;
+    --card: #131210;
+    --gold: #c8a96e;
+    --cream: #e8e0d4;
+    --grey: #888070;
+    --light: #c0b8ac;
+  }
+
+  body {
+    background: var(--black);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+  }
+
+  nav {
+    padding: 32px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(200,169,110,0.12);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    color: var(--cream);
+    text-decoration: none;
+  }
+
+  .nav-back {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--grey);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .nav-back:hover { color: var(--gold); }
+
+  .page-header {
+    padding: 72px 48px 56px;
+    border-bottom: 1px solid rgba(200,169,110,0.1);
+  }
+
+  .page-header .eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+
+  .page-header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(40px, 6vw, 72px);
+    font-weight: 300;
+    line-height: 1;
+    color: var(--cream);
+  }
+
+  .page-header h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .page-header p {
+    margin-top: 20px;
+    font-size: 14px;
+    color: var(--grey);
+    letter-spacing: 0.05em;
+    max-width: 480px;
+    line-height: 1.7;
+  }
+
+  .portfolio-grid {
+    padding: 64px 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+
+  .card {
+    background: var(--card);
+    padding: 52px 44px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s ease;
+  }
+
+  .card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+
+  .card:hover { background: #181510; }
+  .card:hover::after { transform: scaleX(1); }
+
+  .card-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 56px;
+    font-weight: 300;
+    color: rgba(200,169,110,0.07);
+    line-height: 1;
+    margin-bottom: 28px;
+  }
+
+  .card-role {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .card h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+
+  .card-date {
+    font-size: 11px;
+    color: var(--grey);
+    letter-spacing: 0.1em;
+    margin-bottom: 24px;
+  }
+
+  .card p {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--light);
+    margin-bottom: 20px;
+  }
+
+  .card ul {
+    list-style: none;
+    margin-bottom: 28px;
+  }
+
+  .card ul li {
+    font-size: 13px;
+    color: var(--light);
+    line-height: 1.75;
+    padding-left: 16px;
+    position: relative;
+    margin-bottom: 8px;
+  }
+
+  .card ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 11px;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .tag {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--grey);
+    border: 1px solid rgba(136,128,112,0.25);
+    padding: 5px 12px;
+  }
+
+  .card-placeholder {
+    background: #0e0d0b;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 52px 44px;
+    border: 1px dashed rgba(200,169,110,0.1);
+  }
+
+  .card-placeholder h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(200,169,110,0.3);
+    margin-bottom: 12px;
+  }
+
+  .card-placeholder p {
+    font-size: 13px;
+    color: rgba(136,128,112,0.4);
+    line-height: 1.7;
+  }
+
+  /* Skills strip */
+  .skills-strip {
+    padding: 56px 48px;
+    border-top: 1px solid rgba(200,169,110,0.1);
+    background: var(--dark);
+  }
+
+  .skills-strip .eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 32px;
+  }
+
+  .skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .skill-pill {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: var(--light);
+    border: 1px solid rgba(200,169,110,0.2);
+    padding: 8px 20px;
+  }
+
+  footer {
+    padding: 24px 48px;
+    border-top: 1px solid rgba(200,169,110,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer p { font-size: 11px; letter-spacing: 0.1em; color: var(--grey); }
+
+  footer a {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--grey);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  footer a:hover { color: var(--gold); }
+
+  @media (max-width: 700px) {
+    nav, .page-header, .portfolio-grid, .skills-strip, footer { padding-left: 24px; padding-right: 24px; }
+    .portfolio-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="website.html" class="nav-logo">D.J. Fuller</a>
+  <a href="website.html" class="nav-back">← Back</a>
+</nav>
+
+<div class="page-header">
+  <p class="eyebrow">Selected Work</p>
+  <h1>My <em>Portfolio</em></h1>
+  <p>A collection of production work spanning documentary research, commercial lighting, and operations. This portfolio is growing — more to come.</p>
+</div>
+
+<div class="portfolio-grid">
+
+  <div class="card">
+    <div class="card-num">01</div>
+    <div class="card-role">Research Intern</div>
+    <h2>"Unbearable" Documentary</h2>
+    <div class="card-date">May 2024 — August 2024</div>
+    <p>A feature documentary exploring the history of Baylor football and the Art Briles scandal.</p>
+    <ul>
+      <li>Conducted in-depth research on Baylor football history and Art Briles to support the documentary's storytelling.</li>
+      <li>Sourced and curated archival footage to enhance the visual narrative.</li>
+      <li>Designed pitch decks and presentation materials for head producer Eric Geadellman.</li>
+    </ul>
+    <div class="card-tags">
+      <span class="tag">Documentary</span>
+      <span class="tag">Research</span>
+      <span class="tag">Pre-Production</span>
+      <span class="tag">Pitch Decks</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-num">02</div>
+    <div class="card-role">Gaffer</div>
+    <h2>Mokah Coffee Shop Commercial</h2>
+    <div class="card-date">November 2024</div>
+    <p>A student-directed commercial production for a local Dallas coffee brand.</p>
+    <ul>
+      <li>Designed and executed the lighting scheme in collaboration with the Director of Photography.</li>
+      <li>Managed all electrical infrastructure and power distribution on set.</li>
+      <li>Adjusted lighting setups between shots to maintain visual consistency under a tight schedule.</li>
+    </ul>
+    <div class="card-tags">
+      <span class="tag">Commercial</span>
+      <span class="tag">Lighting</span>
+      <span class="tag">On-Set</span>
+      <span class="tag">Gaffer</span>
+    </div>
+  </div>
+
+  <div class="card-placeholder">
+    <h2>More work in progress...</h2>
+    <p>New productions and projects will be added here as they are completed. Currently seeking on-set and producing opportunities to grow this portfolio.</p>
+  </div>
+
+  <div class="card-placeholder">
+    <h2>Demo reel coming soon</h2>
+    <p>A compiled reel of production work is in development. Check back or reach out directly at djfuller@smu.edu.</p>
+  </div>
+
+</div>
+
+<div class="skills-strip">
+  <p class="eyebrow">Skills</p>
+  <div class="skills-list">
+    <span class="skill-pill">Adobe Premiere Pro</span>
+    <span class="skill-pill">Adobe After Effects</span>
+    <span class="skill-pill">Grip & Lighting</span>
+    <span class="skill-pill">Electrical Distribution</span>
+    <span class="skill-pill">Archival Research</span>
+    <span class="skill-pill">Pitch Deck Design</span>
+    <span class="skill-pill">Production Scheduling</span>
+    <span class="skill-pill">Call Sheet Management</span>
+    <span class="skill-pill">On-Set Communication</span>
+    <span class="skill-pill">Story Development</span>
+  </div>
+</div>
+
+<footer>
+  <p>Daniel J. Fuller · djfuller@smu.edu · 469.216.9759</p>
+  <a href="website.html">← Back to Site</a>
+</footer>
+
+</body>
+</html>
